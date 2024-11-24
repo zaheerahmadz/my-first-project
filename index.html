@@ -3,179 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deveslop</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>Smoke-Like Wave Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            background: black; /* Black background for a striking effect */
+        }
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <ul class="topnav" id="myTopnav">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about-us">About</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="topnav-right"><a href="#signup">Sign up</a></li>
-            <li class="topnav-right"><a href="#signin">Sign in</a></li>
-            <li class="dropdownion"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
-        </ul>
-    </nav>
+    <canvas id="smokeCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("smokeCanvas");
+        const ctx = canvas.getContext("2d");
 
-    <script src="script.js"></script> 
-    <div class="contanier" id="section-1-gradient">
-        <div class="row">
-            <div class="col-6">
-               <div class="leftside-col">
-                 <h1 class="large">Crazy Radness</h1>
-                <h1 class="large">Made for Developers</h1>
+        // Set canvas dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            </div>
-            <form>
-                <div class="leftside-col">
-                    <h2>Username</h2>
-                    <input class="inputbox" name="Username" type="text" placeholder="Username">
-                    <h2>Password</h2>
-                    <input class="inputbox" name="Password" type="text" placeholder="Password">
-                </div>
-            </form>
-        </div>
-        <div class="col-6">
-            <div class="rightside-col">
-               <div class="videocontainer">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/DFmhX5h6Lig?si=P9ZDuUFpQI0_Sg4B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div> 
-            </div>
-        </div>
-                
-            </div>
-        </div>
-    </div>
-    <header>
-        <h1 class="section2Header"> The Standards of Awesome</h1>
-    </header>
-    <div class="contanier">
-        <div class="row">
-            <div class="col-4">
-                <div class="box">
-                    <div class="ion">
-                        <img src="ion.png" alt="">
+        // Configuration
+        const colors = ["#ff007f", "#ff8c00", "#00ffc3", "#00aaff", "#ff32e0"];
+        const particles = [];
+        const maxParticles = 10000; // Limit on-screen particles
 
-                    </div>
-                    <label> Click With Me</label>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum error numquam, hic fuga, sapiente quam possimus repudiandae</p>
-                </div>
-               
-            </div>
-            <div class="col-4">
-                <div class="box">
-                    <div class="ion">
-                        <img src="ion.png" alt="">
+        // Particle class for smoke effect
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.size = Math.random() * 40 + 5; // Random size
+                this.opacity = 0.9;
+                this.life = 0; // Particle lifetime
+                this.maxLife = Math.random() * 100 + 50; // Random lifespan
+                this.angle = Math.random() * 2 * Math.PI; // Random direction
+                this.speed = Math.random() * 15 + 0.5; // Random speed
+            }
 
-                    </div>
-                    <label> Learn To Code</label>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum error numquam, hic fuga, sapiente quam possimus repudiandae </p>
-                </div>
-                
-            </div>
-            <div class="col-4">
-                <div class="box">
-                    <div class="ion">
-                        <img src="ion.png" alt="">
+            // Update particle position and opacity
+            update() {
+                this.life++;
+                this.x += Math.cos(this.angle) * this.speed;
+                this.y += Math.sin(this.angle) * this.speed;
+                this.opacity -= 1 / this.maxLife; // Gradual fade-out
 
-                    </div>
-                    <label> Build an Empire</label>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum error numquam, hic fuga, sapiente quam possimus repudiandae </p>
-                </div>
-              
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <button class="learnmore"> Learn More</button>
-            </div>
-        </div>
-    </div>
-    <hr>
-<div class="container">
-<div class="row">
-<div class="col-7">
-<article>
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem laborum fugiat sunt explicabo maiores temporibus ducimus autem doloremque, obcaecati iusto a odio reprehenderit amet, error quam, quo excepturi numquam quidem.
-Et iusto optio magni explicabo sit? Neque qui perferendis quasi delectus, tenetur nesciunt reiciendis consectetur itaque temporibus minima magnam laboriosam laudantium repellendus repudiandae minus, explicabo cupiditate officiis suscipit quibusdam eum?</p>
-</article>
-</div>
-<div class="col-5">
-<div class="slopeion">
-<img src="articleimg.jpg">
-</div>
-</div>
-</div>
-</div>
-<footer>
-    <div class="foot-panel1">
-        Back To Top
-    </div>
-    <div class="foot-panel2">
-<ul>
-            <p>Get to Know Us</p>
-            <a href="#">Careers</a>
-            <a href="#">blog</a>
-            <a href="#">About Amazon</a>
-            <a href="#">Investor Relations</a>
-            <a href="#">Amazon Devices</a>
-            <a href="#">Amazon Science</a>
-</ul>
-        <ul>
-            <p>Get to Know Us</p>
-            <a href="#">Careers</a>
-            <a href="#">blog</a>
-            <a href="#">About Amazon</a>
-            <a href="#">Investor Relations</a>
-            <a href="#">Amazon Devices</a>
-            <a href="#">Amazon Science</a>
+                // Bounce off edges
+                if (this.x <= 0 || this.x >= canvas.width) this.angle = Math.PI - this.angle;
+                if (this.y <= 0 || this.y >= canvas.height) this.angle = -this.angle;
+            }
 
-        </ul>
-        <ul>
-            <p>Get to Know Us</p>
-            <a href="#">Careers</a>
-            <a href="#">blog</a>
-            <a href="#">About Amazon</a>
-            <a href="#">Investor Relations</a>
-            <a href="#">Amazon Devices</a>
-            <a href="#">Amazon Science</a>
+            // Draw the particle
+            draw() {
+                ctx.beginPath();
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1; // Reset global alpha
+            }
+        }
 
-        </ul>
-        <ul>
-            <p>Get to Know Us</p>
-            <a href="#">Careers</a>
-            <a href="#">blog</a>
-            <a href="#">About Amazon</a>
-            <a href="#">Investor Relations</a>
-            <a href="#">Amazon Devices</a>
-            <a href="#">Amazon Science</a>
+        // Create particles on mouse move
+        canvas.addEventListener("mousemove", (e) => {
+            for (let i = 0; i < 5; i++) {
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particles.push(new Particle(e.pageX, e.pageY, randomColor));
+            }
 
-        </ul>
-    </div>
-    <div class="foot-panel3">
-        
-    </div>
+            // Limit total particles on screen
+            if (particles.length > maxParticles) {
+                particles.splice(0, particles.length - maxParticles);
+            }
+        });
 
+        // Animation loop
+        function animate() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)"; // Slightly transparent background for trail effect
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            particles.forEach((particle, index) => {
+                particle.update();
+                particle.draw();
 
+                // Remove particles when life ends
+                if (particle.life > particle.maxLife) {
+                    particles.splice(index, 1);
+                }
+            });
 
+            requestAnimationFrame(animate);
+        }
 
+        // Handle window resizing
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
 
-    <div class="foot-panel4">
-        <a href="#">Conditions of Use</a>
-        <a href="#">Privacy Notice</a>
-        <a href="#">Consumer Health Data Privacy Disclosure</a>
-        <a href="#">Your Ads Privacy Choices</a>
-    </div>
-    <div class="para">
-        © 1996-2024, Amazon.com, Inc. or its affiliates 
-    </div>
-</footer>
-
-   
-   
-  
+        // Start animation
+        animate();
+    </script>
 </body>
 </html>
